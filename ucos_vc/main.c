@@ -3,10 +3,10 @@
 *                                                uC/OS-II
 *                                          The Real-Time Kernel
 *
-description:	ÔÚÇ°Ò»¸ö°æ±¾µÄ»ù´¡ÉÏÔö¼ÓÁËcdÃüÁî
-
-date£º			20050429
-author£º		ÎÄ¼Ñ Email£ºganganwen@163.com 
+description:	åœ¨å‰ä¸€ä¸ªç‰ˆæœ¬çš„åŸºç¡€ä¸Šå¢åŠ äº†cdå‘½ä»¤
+zhstest
+dateï¼š			20050429
+authorï¼š		æ–‡ä½³ Emailï¼šganganwen@163.com 
 *********************************************************************************************************
 */
 
@@ -32,9 +32,9 @@ author£º		ÎÄ¼Ñ Email£ºganganwen@163.com
 
 OS_STK  TaskStk[N_TASKS][TASK_STK_SIZE];    // Tasks stacks
 
-HANDLE mainhandle;		//Ö÷Ïß³Ì¾ä±ú
-CONTEXT Context;		//Ö÷Ïß³ÌÇĞ»»ÉÏÏÂÎÄ
-BOOLEAN FlagEn = 1;		//Ôö¼ÓÒ»¸öÈ«¾Ö±äÁ¿£¬×öÎªÊÇ·ñÊ±ÖÓµ÷¶ÈµÄ±êÖ¾
+HANDLE mainhandle;		//ä¸»çº¿ç¨‹å¥æŸ„
+CONTEXT Context;		//ä¸»çº¿ç¨‹åˆ‡æ¢ä¸Šä¸‹æ–‡
+BOOLEAN FlagEn = 1;		//å¢åŠ ä¸€ä¸ªå…¨å±€å˜é‡ï¼Œåšä¸ºæ˜¯å¦æ—¶é’Ÿè°ƒåº¦çš„æ ‡å¿—
 
 
 /*
@@ -45,7 +45,7 @@ BOOLEAN FlagEn = 1;		//Ôö¼ÓÒ»¸öÈ«¾Ö±äÁ¿£¬×öÎªÊÇ·ñÊ±ÖÓµ÷¶ÈµÄ±êÖ¾
 void TaskStart(void * pParam) ;
 void Task1(void * pParam) ;                            /* Function prototypes of tasks                  */
 
-void VCInit(void);						//³õÊ¼»¯Ïà¹Ø±äÁ¿,Ò»¶¨ĞèÒª
+void VCInit(void);						//åˆå§‹åŒ–ç›¸å…³å˜é‡,ä¸€å®šéœ€è¦
 
 /*$PAGE*/
 /*
@@ -56,7 +56,7 @@ void VCInit(void);						//³õÊ¼»¯Ïà¹Ø±äÁ¿,Ò»¶¨ĞèÒª
 
 int main(int argc, char **argv)
 {
-	VCInit();	//³õÊ¼»¯Ò»Ğ©±äÁ¿
+	VCInit();	//åˆå§‹åŒ–ä¸€äº›å˜é‡
 	
 	OSInit();
 	FS_Init();         /* Init the file system */
@@ -72,9 +72,9 @@ void VCInit(void)
 {
 	HANDLE cp,ct;
 	Context.ContextFlags = CONTEXT_CONTROL;
-	cp = GetCurrentProcess();	//µÃµ½µ±Ç°½ø³Ì¾ä±ú
-	ct = GetCurrentThread();	//µÃµ½µ±Ç°Ïß³ÌÎ±¾ä±ú
-	DuplicateHandle(cp, ct, cp, &mainhandle, 0, TRUE, 2);	//Î±¾ä±ú×ª»»,µÃµ½Ïß³ÌÕæ¾ä±ú
+	cp = GetCurrentProcess();	//å¾—åˆ°å½“å‰è¿›ç¨‹å¥æŸ„
+	ct = GetCurrentThread();	//å¾—åˆ°å½“å‰çº¿ç¨‹ä¼ªå¥æŸ„
+	DuplicateHandle(cp, ct, cp, &mainhandle, 0, TRUE, 2);	//ä¼ªå¥æŸ„è½¬æ¢,å¾—åˆ°çº¿ç¨‹çœŸå¥æŸ„
 		
 }
 
@@ -83,7 +83,7 @@ void TaskStart(void * pParam)
 	char err;	
 	OS_EVENT *sem1;
 
-	timeSetEvent(1000/OS_TICKS_PER_SEC, 0, OSTickISR, 0, TIME_PERIODIC);	//¿ªÆôÒ»¸ö¶¨Ê±Æ÷Ïß³Ì,¸Ğ¾õ10 ticks/s±È½ÏºÃ
+	timeSetEvent(1000/OS_TICKS_PER_SEC, 0, OSTickISR, 0, TIME_PERIODIC);	//å¼€å¯ä¸€ä¸ªå®šæ—¶å™¨çº¿ç¨‹,æ„Ÿè§‰10 ticks/sæ¯”è¾ƒå¥½
 	sem1 = OSSemCreate(0);
 	while(1)
 	{		
